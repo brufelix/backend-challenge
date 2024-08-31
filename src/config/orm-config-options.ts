@@ -1,7 +1,7 @@
 import { envs } from '@/constants/envs';
 import { DataSourceOptions } from 'typeorm';
 
-export const ormconfig: DataSourceOptions = {
+export const ormConfigOptions: DataSourceOptions = {
   type: 'postgres',
   host: envs.database.host,
   port: Number(envs.database.port),
