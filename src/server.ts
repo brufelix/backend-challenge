@@ -1,9 +1,10 @@
+import 'dotenv/config';
+import 'module-alias/register';
+
 import { DataSource } from 'typeorm';
 import { envs } from '@/constants/envs';
 import express, { Application } from 'express';
-import { ormConfigOptions } from './config/orm-config-options';
-
-import 'module-alias/register';
+import { dataSource } from './config/data-source.config';
 
 class Server {
   private port: number;
@@ -12,8 +13,8 @@ class Server {
 
   constructor() {
     this.app = express();
+    this.dataSource = dataSource;
     this.port = Number(envs.port);
-    this.dataSource = new DataSource(ormConfigOptions);
 
     this.configureMiddleware();
   }
