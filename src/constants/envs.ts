@@ -1,5 +1,6 @@
 export const envs = {
   port: process.env.PORT || 3333,
+  isProd: process.env.NODE_ENV === 'production',
   database: {
     host: process.env.DATABASE_HOST,
     databaseName: process.env.DATABASE_NAME,
