@@ -8,6 +8,6 @@ export const ormConfigOptions: DataSourceOptions = {
   username: envs.database.username,
   password: envs.database.password,
   database: envs.database.databaseName,
-  entities: [__dirname + '/entity/**/*.ts'],
   synchronize: !envs.isProd, // production-only enabled.
+  entities: [__dirname.replace('/config', '') + '/entities/**/*.ts'],
 };
