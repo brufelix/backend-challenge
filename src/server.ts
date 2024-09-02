@@ -2,6 +2,7 @@ import 'dotenv/config';
 import 'module-alias/register';
 
 import cors from 'cors';
+import router from './routes';
 import { DataSource } from 'typeorm';
 import { envs } from '@/constants/envs';
 import express, { Application } from 'express';
@@ -23,6 +24,9 @@ class Server {
   private configureMiddleware(): void {
     this.app.use(express.json());
     this.app.use(cors({ origin: '*' }));
+    this.app.use(express.urlencoded({ extended: true }));
+
+    this.app.use(router);
   }
 
   private async initializeDataSource(): Promise<void> {
