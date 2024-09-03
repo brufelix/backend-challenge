@@ -9,5 +9,5 @@ export const ormConfigOptions: DataSourceOptions = {
   password: envs.database.password,
   database: envs.database.databaseName,
   synchronize: !envs.isProd, // production-only enabled.
-  entities: [__dirname.replace('/config', '') + '/entities/**/*.ts'],
+  entities: [__dirname.replace('/config', '') + '/../**/*.entity.{js,ts}'],
 };
