@@ -2,8 +2,8 @@ import { Options } from 'swagger-jsdoc';
 import swaggerJSDoc from 'swagger-jsdoc';
 
 const swaggerOptions: Options = {
-  apis: ['./src/routes/*.{js,ts}'],
-  swaggerDefinition: {
+  apis: ['routes/*.{js,ts}'],
+  definition: {
     openapi: '3.0.0',
     info: {
       version: '1.0.0',
