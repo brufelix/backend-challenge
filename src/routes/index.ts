@@ -22,8 +22,11 @@ import { AddressesController } from '@/controllers/addresses/addresses.controlle
 
 const router = Router();
 
+// Users Repository.
+const usersRepository = new UsersRepository();
+
 // Auth Middleware.
-const authMiddleware = new AuthMiddleware();
+const authMiddleware = new AuthMiddleware(usersRepository);
 
 // addresses.
 const addressesRepository = new AddressesRepository();
@@ -36,7 +39,6 @@ const addressesRoutes = new AddressesRoutes(
 ).getAllRoutes();
 
 // Users.
-const usersRepository = new UsersRepository();
 const usersService = new UsersService(usersRepository);
 const usersController = new UsersController(usersService);
 
@@ -51,6 +53,7 @@ const authController = new AuthController(authService);
 
 const authRoutes = new AuthRoutes(authController).getAllRoutes();
 
+// Define routes.
 router.use('/auth', authRoutes);
 router.use('/users', usersRoutes);
 router.use('/addresses', addressesRoutes);

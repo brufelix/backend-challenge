@@ -5,7 +5,7 @@ import { ErrorHandler } from '@/interfaces/Error-Handler.interface';
 import { UnauthorizedError } from '@/helpers/errors/unauthorized-error';
 
 export class AuthMiddleware extends ErrorHandler {
-  constructor(public usersRepository = new UsersRepository()) {
+  constructor(private readonly usersRepository: UsersRepository) {
     super();
   }
 
