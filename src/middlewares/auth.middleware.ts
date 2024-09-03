@@ -1,11 +1,17 @@
 import { JwtToken } from '@/helpers/jwt-token.helper';
 import { NextFunction, Request, Response } from 'express';
+import { UsersRepository } from '@/repositories/users.repository';
+import { ErrorHandler } from '@/interfaces/Error-Handler.interface';
 import { UnauthorizedError } from '@/helpers/errors/unauthorized-error';
 
-export class AuthMiddleware {
-  auth(request: Request, response: Response, next: NextFunction) {
+export class AuthMiddleware extends ErrorHandler {
+  constructor(public usersRepository = new UsersRepository()) {
+    super();
+  }
+
+  async auth(req: Request, res: Response, next: NextFunction) {
     try {
-      const authHeader = request.headers.authorization;
+      const authHeader = req.headers.authorization;
       if (!authHeader) {
         throw new UnauthorizedError('Access token not found.');
       }
@@ -17,12 +23,20 @@ export class AuthMiddleware {
       }
 
       const user = JwtToken.decodeToken(token);
-      request.user = user;
+
+      const existingUser = await this.usersRepository.findOne({
+        where: { id: user.id },
+      });
+
+      if (!existingUser) {
+        throw new UnauthorizedError('O usuário não existe mais.');
+      }
+
+      req.user = user;
 
       return next();
-    } catch (error) {
-      console.error(error);
-      return response.status(401).end();
+    } catch (error: any) {
+      this.sendErrorResponse(res, error);
     }
   }
 }
