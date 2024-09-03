@@ -7,7 +7,7 @@ import { BadRequestError } from '@/helpers/errors/bad-request-error';
 import { UserLoggedResponse } from '@/@types/user-logged-response.type';
 
 export class AuthService {
-  constructor(public usersRepository = new UsersRepository()) {}
+  constructor(private readonly usersRepository: UsersRepository) {}
 
   async login({ email, password }: LoginDto): Promise<UserLoggedResponse> {
     const validUser = await this.validateUser(email, password);

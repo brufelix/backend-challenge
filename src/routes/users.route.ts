@@ -11,13 +11,12 @@ import { UsersController } from '@/controllers/users/users.controller';
 
 export class UsersRoutes {
   private router: Router;
-  private authMiddleware: AuthMiddleware;
-  private usersController: UsersController;
 
-  constructor() {
+  constructor(
+    private readonly authMiddleware: AuthMiddleware,
+    private readonly usersController: UsersController
+  ) {
     this.router = Router();
-    this.authMiddleware = new AuthMiddleware();
-    this.usersController = new UsersController();
   }
 
   getAllRoutes() {
@@ -142,7 +141,7 @@ export class UsersRoutes {
      *                       complement:
      *                         type: string
      *                       userId:
-     *                         type: string 
+     *                         type: string
      *                       createdAt:
      *                         type: string
      *                         format: date-time

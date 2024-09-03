@@ -6,7 +6,7 @@ import { ErrorHandler } from '@/interfaces/Error-Handler.interface';
 import { createUserValidation } from './validations/create-user.validation';
 
 export class UsersController extends ErrorHandler {
-  constructor(public usersService = new UsersService()) {
+  constructor(private readonly usersService: UsersService) {
     super();
   }
 

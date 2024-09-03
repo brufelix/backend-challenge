@@ -10,11 +10,9 @@ import { AuthController } from '@/controllers/auth/auth.controller';
 
 export class AuthRoutes {
   private router: Router;
-  private authController: AuthController;
 
-  constructor() {
+  constructor(private readonly authController: AuthController) {
     this.router = Router();
-    this.authController = new AuthController();
   }
 
   getAllRoutes() {

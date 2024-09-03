@@ -11,13 +11,12 @@ import { AddressesController } from '@/controllers/addresses/addresses.controlle
 
 export class AddressesRoutes {
   private router: Router;
-  private authMiddleware: AuthMiddleware;
-  private addressesController: AddressesController;
 
-  constructor() {
+  constructor(
+    private readonly authMiddleware: AuthMiddleware,
+    private readonly addressesController: AddressesController
+  ) {
     this.router = Router();
-    this.authMiddleware = new AuthMiddleware();
-    this.addressesController = new AddressesController();
   }
 
   getAllRoutes() {

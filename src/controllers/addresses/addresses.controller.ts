@@ -7,7 +7,7 @@ import { createAddressValidation } from './validations/create-address.validation
 import { UpdateAddressDto } from '@/controllers/addresses/dto/update-address.dto';
 
 export class AddressesController extends ErrorHandler {
-  constructor(public addressesService = new AddressesService()) {
+  constructor(private readonly addressesService: AddressesService) {
     super();
   }
 

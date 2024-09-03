@@ -7,7 +7,7 @@ import { ListAddressesDto } from '@/controllers/addresses/dto/list-addresses.dto
 import { UpdateAddressDto } from '@/controllers/addresses/dto/update-address.dto';
 
 export class AddressesService {
-  constructor(public addressesRepository = new AddressesRepository()) {}
+  constructor(private readonly addressesRepository: AddressesRepository) {}
 
   async insert(data: CreateAddressDto): Promise<Address> {
     return this.addressesRepository.insert(data);

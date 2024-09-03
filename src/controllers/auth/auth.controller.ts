@@ -5,7 +5,7 @@ import { loginValidation } from './validations/login.validation';
 import { ErrorHandler } from '@/interfaces/Error-Handler.interface';
 
 export class AuthController extends ErrorHandler {
-  constructor(public authService = new AuthService()) {
+  constructor(private readonly authService: AuthService) {
     super();
   }
 

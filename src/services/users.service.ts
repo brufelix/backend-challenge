@@ -11,7 +11,7 @@ import { UpdateUserDto } from '@/controllers/users/dto/update-user.dto';
 import { UserLoggedResponse } from '@/@types/user-logged-response.type';
 
 export class UsersService {
-  constructor(public usersRepository = new UsersRepository()) {}
+  constructor(private readonly usersRepository: UsersRepository) {}
 
   async insert(data: CreateUserDto): Promise<UserLoggedResponse> {
     const email = data.email.toLowerCase();
