@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from '@/services/users.service';
+import { ErrorHandler } from '@/interfaces/Error-Handler.interface';
 import { createUserValidation } from './validations/create-user.validation';
 
-export class UsersController {
-  constructor(public usersService = new UsersService()) {}
+export class UsersController extends ErrorHandler {
+  constructor(public usersService = new UsersService()) {
+    super();
+  }
 
   async insert({ body }: Request, res: Response): Promise<void> {
     try {
@@ -14,9 +17,8 @@ export class UsersController {
 
       const result = await this.usersService.insert(data);
       res.status(201).json(result);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error });
+    } catch (error: any) {
+      this.sendErrorResponse(res, error);
     }
   }
 
@@ -26,8 +28,8 @@ export class UsersController {
       const result = await this.usersService.me(id);
 
       res.status(200).json(result);
-    } catch (error) {
-      res.status(500).json({ error });
+    } catch (error: any) {
+      this.sendErrorResponse(res, error);
     }
   }
 
@@ -38,8 +40,8 @@ export class UsersController {
 
       const result = await this.usersService.update(id, data);
       res.status(200).json(result);
-    } catch (error) {
-      res.status(500).json({ error });
+    } catch (error: any) {
+      this.sendErrorResponse(res, error);
     }
   }
 
@@ -49,8 +51,8 @@ export class UsersController {
       await this.usersService.destroy(id);
 
       res.status(204).send();
-    } catch (error) {
-      res.status(500).json({ error });
+    } catch (error: any) {
+      this.sendErrorResponse(res, error);
     }
   }
 }

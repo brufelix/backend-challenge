@@ -2,9 +2,12 @@ import { LoginDto } from './dto/login.dto';
 import { Request, Response } from 'express';
 import { AuthService } from '@/services/auth.service';
 import { loginValidation } from './validations/login.validation';
+import { ErrorHandler } from '@/interfaces/Error-Handler.interface';
 
-export class AuthController {
-  constructor(public authService = new AuthService()) {}
+export class AuthController extends ErrorHandler {
+  constructor(public authService = new AuthService()) {
+    super();
+  }
 
   async login({ body }: Request, res: Response): Promise<void> {
     try {
@@ -13,8 +16,8 @@ export class AuthController {
 
       const result = await this.authService.login(data);
       res.status(201).json(result);
-    } catch (error) {
-      res.status(500).json({ error });
+    } catch (error: any) {
+      this.sendErrorResponse(res, error);
     }
   }
 }
