@@ -30,7 +30,7 @@ export class UsersRoutes {
 
     // Delete.
     const destroy = this.usersController.destroy.bind(this.usersController);
-    this.router.put('/:id', authMiddleware, destroy);
+    this.router.delete('/:id', authMiddleware, destroy);
 
     return this.router;
   }
