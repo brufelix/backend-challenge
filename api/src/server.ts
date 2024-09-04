@@ -5,7 +5,7 @@ import cors from 'cors';
 import router from './routes';
 import { envs } from '@/constants/envs';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocs from '../swagger-config';
+import swaggerDocs from './swagger-config';
 import express, { Application } from 'express';
 
 class Server {

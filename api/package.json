@@ -1,9 +1,9 @@
 {
   "name": "backend-challenge",
   "version": "1.0.0",
-  "main": "dist/src/server.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/src/server.js",
+    "start": "node dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn src/server.ts",
     "build": "tsc",
     "test": "jest",
@@ -48,6 +48,6 @@
     "zod": "^3.23.8"
   },
   "_moduleAliases": {
-    "@": "./dist/src"
+    "@": "./dist"
   }
 }

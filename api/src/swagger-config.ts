@@ -3,7 +3,7 @@ import { Options } from 'swagger-jsdoc';
 import swaggerJSDoc from 'swagger-jsdoc';
 
 const swaggerOptions: Options = {
-  apis: [path.resolve(__dirname, './src/routes/*.{js,ts}')],
+  apis: [path.resolve(__dirname, './routes/*.{js,ts}')],
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
