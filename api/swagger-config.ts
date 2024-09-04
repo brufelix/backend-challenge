@@ -1,9 +1,10 @@
+import path from 'path';
 import { Options } from 'swagger-jsdoc';
 import swaggerJSDoc from 'swagger-jsdoc';
 
 const swaggerOptions: Options = {
-  apis: ['routes/*.{js,ts}'],
-  definition: {
+  apis: [path.resolve(__dirname, './src/routes/*.{js,ts}')],
+  swaggerDefinition: {
     openapi: '3.0.0',
     info: {
       version: '1.0.0',
@@ -19,4 +20,5 @@ const swaggerOptions: Options = {
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
+
 export default swaggerDocs;
